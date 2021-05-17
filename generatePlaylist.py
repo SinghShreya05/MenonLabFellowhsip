@@ -1,13 +1,7 @@
-import argparse
-import pprint
-import sys
-import os
-import subprocess
-import json
 import spotipy
-import spotipy.util as util
+import numpy as np
 import pandas as pd
-import time
+import spotipy.util as util
 from spotipy.oauth2 import SpotifyClientCredentials
 
 cid = 'ffbef2bcb4b84e80b3a0039a2906cb01'
@@ -84,15 +78,5 @@ def main(username):
     tracks = get_tracks_from_playlists(username, sp)
     tracks_with_features = get_features(tracks,sp)
     write_to_csv(tracks_with_features)
-    spotify_data(tracks_with_features)
-
-if __name__ == '__main__':
-    print ('Starting...')
-    parser = argparse.ArgumentParser(description='this sript will grab user playlists')
-    parser.add_argument('--username', help='username')
-    parser.add_argument('--cid', help='credential id')
-    parser.add_argument('--secret', help='secret key')
-    parser.add_argument('--inputpath', help='Input file path')
-    args = parser.parse_args()
-    main(args.username)
+    return spotify_data(tracks_with_features)
 
